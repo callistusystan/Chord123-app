@@ -8,7 +8,7 @@ import Stepper, { Step, StepLabel, StepContent } from 'material-ui/Stepper';
 import Dropzone from 'react-dropzone-component';
 import 'react-dropzone-component/styles/filepicker.css';
 import 'dropzone/dist/min/dropzone.min.css';
-import KEYS from './keys';
+import { KEYS, KEYS_MAP } from './keys';
 
 const URL = 'https://chord123.herokuapp.com/';
 
@@ -49,12 +49,13 @@ class TranslateTab extends Component {
 
     onSuccess = (file, response) => {
         if (response) {
-            const outputTitle = `${this.state.title} (${this.state.key}).docx`;
+            let outputTitle = `${this.state.title} (${this.state.targetKey}).docx`;
+            outputTitle = outputTitle.replace(/[A-G]#/g, match => KEYS_MAP[match]);
             const storageRef = firebase.app().storage().ref();
             const ref = storageRef.child(outputTitle);
             ref.putString(response, 'base64')
                 .then(({ downloadURL }) => {
-                    const URL = `https://docs.google.com/viewerng/viewer?url=${downloadURL}`
+                    const URL = `https://docs.google.com/viewer?url=${downloadURL}`;
                     this.downloader.href = URL;
                     this.downloader.click();
                     this.setState({ downloading: false });

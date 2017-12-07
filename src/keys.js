@@ -1,4 +1,4 @@
-export default [{
+export const KEYS = [{
     key: 'A',
     value: 'A'
 },{
@@ -35,3 +35,18 @@ export default [{
     key: 'G#',
     value: 'G#/Ab'
 }];
+
+export const KEYS_MAP = {
+    A: 'A',
+    'A#': 'Bb',
+    B: 'B',
+    C: 'C',
+    'C#': 'Db',
+    D: 'D',
+    'D#': 'Eb',
+    E: 'E',
+    F: 'F',
+    'F#': 'Gb',
+    G: 'G',
+    'G#': 'Ab'
+};
