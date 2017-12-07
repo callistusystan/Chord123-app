@@ -8,6 +8,7 @@ import Stepper, { Step, StepLabel, StepContent } from 'material-ui/Stepper';
 import Dropzone from 'react-dropzone-component';
 import 'react-dropzone-component/styles/filepicker.css';
 import 'dropzone/dist/min/dropzone.min.css';
+import KEYS from './keys';
 
 const URL = 'https://chord123.herokuapp.com/';
 
@@ -98,7 +99,6 @@ class TranslateTab extends Component {
         };
 
         const steps = ['Choose a Key to translate to', 'Upload your .docx file', 'Download the file!'];
-        const KEYS = ['A','A#','B','C','C#','D','D#','E','F','F#','G','G#'];
 
         return (
             <div id='appCardContent' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -116,8 +116,8 @@ class TranslateTab extends Component {
                                         input={<Input id="key-simple" />}
                                         autoWidth
                                     >
-                                        {KEYS.map(key => (
-                                            <MenuItem key={key} value={key}>{key}</MenuItem>
+                                        {KEYS.map(({ key, value }) => (
+                                            <MenuItem key={key} value={key}>{value}</MenuItem>
                                         ))}
                                     </Select>
                                 </FormControl>
