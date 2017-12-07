@@ -15,8 +15,7 @@ class TransposeTab extends Component {
     state = {
         origKey: 'G',
         targetKey: 'A',
-        title: '',
-        response: null
+        title: ''
     };
 
     componentDidMount() {
@@ -62,8 +61,9 @@ class TransposeTab extends Component {
             const storageRef = firebase.app().storage().ref();
             const ref = storageRef.child(outputTitle);
             ref.putString(response, 'base64')
-                .then(snapshot => {
-                    this.downloader.href = snapshot.downloadURL;
+                .then(({ downloadURL }) => {
+                    const URL = `https://docs.google.com/viewerng/viewer?url=${downloadURL}`
+                    this.downloader.href = URL;
                     this.downloader.click();
                     this.setState({ downloading: false });
                 })

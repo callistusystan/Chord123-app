@@ -10,6 +10,7 @@ import 'dropzone/dist/min/dropzone.min.css';
 import TranslateTab from './TranslateTab';
 import TransposeTab from './TransposeTab';
 import setupFirebase from './API_SETUP';
+import firebase from 'firebase';
 
 const TabContainer = ({ children, dir }) => {
     return (
@@ -24,6 +25,11 @@ class App extends Component {
         super(props);
 
         setupFirebase();
+        firebase.auth()
+                .signInAnonymously()
+                .catch(error => {
+                  console.log("error");
+                });
     }
 
     state = {
