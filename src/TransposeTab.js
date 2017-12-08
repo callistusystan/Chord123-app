@@ -16,7 +16,8 @@ class TransposeTab extends Component {
     state = {
         origKey: 'G',
         targetKey: 'A',
-        title: ''
+        title: '',
+        downloading: false
     };
 
     componentDidMount() {
@@ -53,7 +54,7 @@ class TransposeTab extends Component {
     };
 
     onRemovedFile = () => {
-        this.setState({ title: '' });
+        this.setState({ title: '', downloading: false });
     };
 
     onSuccess = (file, response) => {
@@ -73,6 +74,11 @@ class TransposeTab extends Component {
                     this.downloader.href = URL;
                     this.downloader.click();
                     this.setState({ downloading: false });
+                    this.handleChange({
+                        target: {
+                            value: this.state.key
+                        }
+                    });
                 })
                 .catch(e => {
                     console.log(e);
